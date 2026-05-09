@@ -1,0 +1,26 @@
+---
+- name: "Maintenance: Update Ubuntu Workstations"
+  hosts: usuarios_empresa  # Nome do grupo que está no seu hosts.ini
+  gather_facts: yes        # Coleta infos da máquina (versão do Ubuntu, etc)
+
+  tasks:
+    - name: "Update APT cache and upgrade all packages (dist-upgrade)"
+      apt:
+        update_cache: yes
+        upgrade: dist      # O 'dist' garante que até pacotes segurados sejam atualizados
+        lock_timeout: 60   # Espera 60s se o sistema estiver ocupado com outra atualização
+
+    - name: "Remove unused packages and dependencies"
+      apt:
+        autoremove: yes
+        purge: yes         # Remove arquivos de configuração de pacotes excluídos
+
+    - name: "Check if the system requires a reboot"
+      register: reboot_required_file
+      stat:
+        path: /var/run/reboot-required
+
+    - name: "Notification: Reboot needed"
+      debug:
+        msg: "Attention: Host {{ inventory_hostname }} needs a reboot to apply updates!"
+      when: reboot_required_file.stat.exists
