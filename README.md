@@ -5,7 +5,7 @@ Este projeto resolve um problema crítico de infraestrutura: automatizar a gest�
 ## 📋 Cenário e Motivação
 Utilizando monitoramento via **Grafana** (baseado em métricas do **Zabbix**), identifiquei que o parque tecnológico estava com alto risco de segurança devido ao grande volume de pacotes desatualizados, conforme mostrado no dashboard abaixo:
 
-![Dashboard do Grafana mostrando pacotes desatualizados](https://github.com/DanielMouraoti/ansible-ubuntu-maintenance/raw/main/images/grafana-antes.png)
+![Dashboard Grafana Antes](images/Captura%20de%20tela%20de%202026-05-11%2013-25-58.jpg)
 *Hosts críticos como usr16 (99 pacotes) e usr33 (98 pacotes) pendentes de atualização.*
 
 ## 🛠️ Stack Tecnológica
