@@ -1,27 +1,24 @@
-# Automação de Gestão de Patches Ubuntu com Ansible
+# Automação de Patch Management & Compliance com Ansible 🚀
 
-Este projeto nasceu de uma necessidade real de infraestrutura: otimizar a atualização de segurança de mais de 60 estações de trabalho Ubuntu. A solução utiliza **Ansible** para garantir que todas as máquinas estejam em conformidade, eliminando falhas de segurança reportadas em dashboards de monitoramento.
+Este projeto resolve um problema crítico de infraestrutura: automatizar a gestão de atualizações de segurança em 60+ estações de trabalho Ubuntu de forma simultânea e centralizada.
 
-## Cenário e Motivação
-Através do monitoramento via **Grafana/Zabbix**, identifiquei um volume crítico de pacotes pendentes de atualização no parque tecnológico. A execução manual host-a-host era inviável. 
+## 📋 Cenário e Motivação
+Utilizando monitoramento via **Grafana** (baseado em métricas do **Zabbix**), identifiquei que o parque tecnológico estava com alto risco de segurança devido ao grande volume de pacotes desatualizados, conforme mostrado no dashboard abaixo:
 
-**Objetivo:** Criar uma estrutura de **Infrastructure as Code (IaC)** capaz de realizar o ciclo completo de manutenção (Update, Upgrade, Dist-Upgrade e Autoremove) de forma simultânea e segura.
+![Dashboard do Grafana mostrando pacotes desatualizados](https://github.com/DanielMouraoti/ansible-ubuntu-maintenance/raw/main/images/grafana-antes.png)
+*Hosts críticos como usr16 (99 pacotes) e usr33 (98 pacotes) pendentes de atualização.*
 
-## Tecnologias e Conceitos
-- **Ansible:** Arquitetura *agentless* para automação.
-- **SSH (ED25519):** Comunicação segura entre a estação de controle e os hosts.
-- **IaC (Infrastructure as Code):** Padronização de ambientes via código.
-- **Observability-Driven Automation:** Automação baseada em dados de monitoramento.
+## 🛠️ Stack Tecnológica
+- **Ansible / YAML**: Gerenciamento de configuração e Infraestrutura como Código (IaC).
+- **SSH (ED25519)**: Comunicação segura e *agentless*.
+- **Ubuntu Server/Desktop**: Sistemas de destino.
+- **Observability**: Grafana/Zabbix para validação baseada em dados.
 
-## Estrutura do Projeto
-- `inventory/`: Gerenciamento de hosts e variáveis.
-- `playbooks/`: Definição das tarefas de manutenção (YAML).
-- `ansible.cfg`: Configurações de execução, privilégios e performance.
-- `.gitignore`: Proteção de dados sensíveis (IPs e chaves).
+## 🚀 Como Executar
+O projeto segue as melhores práticas de IaC. Para reproduzir:
+1. Configure o inventário em `inventory/hosts.ini`.
+2. Certifique-se de que sua chave pública SSH está nos hosts.
+3. Execute o Playbook profissional, que trata de erros e reboots:
 
-## Como Executar
-1. Certifique-se de que sua chave pública SSH está presente nos hosts remotos.
-2. Configure o inventário em `inventory/hosts.ini`.
-3. Execute o Playbook:
    ```bash
    ansible-playbook playbooks/update_system.yml
